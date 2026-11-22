@@ -1,0 +1,118 @@
+/* frontend/src/index.css */
+/* Global styles: poore project ke colors, fonts aur buttons yahan se control honge. */
+
+:root {
+  /* Colors */
+  --color-primary: #2563eb; /* blue */
+  --color-primary-dark: #1d4ed8;
+  --color-accent: #7c3aed; /* purple */
+  --color-bg: #ffffff;
+  --color-bg-soft: #f8fafc;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+
+  /* Blue se purple gradient (logo, heading, CTA ke liye) */
+  --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+
+  /* Shape, shadow aur width */
+  --radius: 8px;
+  --max-width: 1100px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 20px 40px -12px rgba(15, 23, 42, 0.18);
+}
+
+/* Sab elements ke liye same box sizing (layout predictable rehta hai) */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 12px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0 0 12px;
+  color: var(--color-text-muted);
+}
+
+/* Links ke neeche underline nahi, aur color parent se aayega */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Page ka content center mein rakhne ke liye */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ---------- Reusable buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+
+.btn-lg {
+  padding: 13px 24px;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-outline {
+  background-color: #ffffff;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Keyboard se navigate karne wale users ke liye focus ring (accessibility) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

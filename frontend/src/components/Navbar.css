@@ -1,0 +1,81 @@
+/* frontend/src/components/Navbar.css */
+
+.navbar {
+  position: sticky; /* scroll karne par bhi upar chipka rahega */
+  top: 0;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px); /* peeche ka content halka dhundhla dikhta hai */
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.navbar-logo-icon {
+  background: var(--gradient);
+  color: #ffffff;
+  padding: 3px 9px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-link {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: var(--color-primary);
+  background-color: var(--color-bg-soft);
+}
+
+/* Navbar ke buttons thode chhote */
+.navbar .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Chhoti screen (mobile) par spacing kam */
+@media (max-width: 480px) {
+  .navbar-links {
+    gap: 6px;
+  }
+  .navbar-logo {
+    font-size: 16px;
+  }
+  .navbar-logo-icon {
+    display: none;
+  }
+  .navbar .btn {
+    padding: 6px 12px;
+  }
+}
