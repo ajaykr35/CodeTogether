@@ -1,0 +1,412 @@
+/* frontend/src/pages/Auth.css */
+/* Login aur Register dono pages ke styles */
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 130px);
+  padding: 40px 16px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Poora card: left panel + right form */
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  width: 100%;
+  max-width: 960px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px -20px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+}
+
+/* ---------- Left dark panel ---------- */
+.auth-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 40px;
+  background-color: #0f172a;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* Peeche ke do glow circles (blue aur purple) */
+.auth-side::before,
+.auth-side::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+}
+
+.auth-side::before {
+  width: 280px;
+  height: 280px;
+  top: -80px;
+  right: -80px;
+  background: #2563eb;
+}
+
+.auth-side::after {
+  width: 260px;
+  height: 260px;
+  bottom: -90px;
+  left: -70px;
+  background: #7c3aed;
+}
+
+/* Glow ke upar content dikhane ke liye */
+.auth-side > * {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-side-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.brand-badge {
+  padding: 3px 9px;
+  border-radius: 7px;
+  background: var(--gradient);
+  color: #ffffff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-side h2 {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.auth-side p {
+  color: #cbd5e1;
+}
+
+/* ---------- Mini live-coding preview card ---------- */
+.auth-preview {
+  margin: 24px 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background-color: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  font-family: Consolas, "Courier New", monospace;
+  overflow: hidden;
+}
+
+.auth-preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+}
+
+.auth-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.auth-online::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #4ade80;
+}
+
+.auth-code {
+  padding: 14px 14px 16px;
+  font-size: 13px;
+  color: #e2e8f0;
+}
+
+.auth-code-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-height: 30px;
+  white-space: pre;
+}
+
+.auth-code-no {
+  width: 12px;
+  text-align: right;
+  color: #475569;
+}
+
+.c-kw {
+  color: #c4b5fd;
+}
+.c-fn {
+  color: #93c5fd;
+}
+.c-str {
+  color: #86efac;
+}
+
+.auth-cursor {
+  position: relative;
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  margin-left: 2px;
+}
+
+.auth-cursor span {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  padding: 1px 6px;
+  border-radius: 4px 4px 4px 0;
+  color: #ffffff;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.auth-cursor-blue {
+  background-color: #60a5fa;
+}
+.auth-cursor-blue span {
+  background-color: #2563eb;
+}
+.auth-cursor-purple {
+  background-color: #a78bfa;
+}
+.auth-cursor-purple span {
+  background-color: #7c3aed;
+}
+
+.auth-side-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.auth-side-list li::before {
+  content: "✓";
+  margin-right: 10px;
+  color: #4ade80;
+  font-weight: 700;
+}
+
+/* ---------- Right form card ---------- */
+.auth-card {
+  padding: 44px 40px;
+}
+
+.auth-back {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auth-back:hover {
+  color: var(--color-primary);
+}
+
+/* Mobile par dikhne wala chhota logo (desktop par hidden) */
+.auth-mobile-brand {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.auth-card h1 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.auth-card .auth-intro {
+  margin-bottom: 28px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 15px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background-color 0.15s;
+}
+
+.form-input::placeholder {
+  color: #94a3b8;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* Left icon ke liye jagah */
+.form-input.has-icon {
+  padding-left: 42px;
+}
+
+/* Right eye button ke liye jagah */
+.form-input.has-toggle {
+  padding-right: 46px;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  display: flex;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.form-input:focus ~ .input-icon,
+.input-wrap:focus-within .input-icon {
+  color: var(--color-primary);
+}
+
+.input-error {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.input-error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  display: flex;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.toggle-password:hover {
+  background-color: #e2e8f0;
+  color: var(--color-accent);
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.form-info {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  background-color: #eff6ff;
+  color: var(--color-primary-dark);
+  font-size: 14px;
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px 18px;
+  font-size: 16px;
+}
+
+.auth-footer {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive ---------- */
+/* Tablet aur mobile: left panel hata do, sirf form dikhao */
+@media (max-width: 860px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+  }
+  .auth-side {
+    display: none;
+  }
+  .auth-mobile-brand {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 20px 12px;
+    align-items: flex-start;
+  }
+  .auth-card {
+    padding: 28px 20px;
+  }
+  .auth-card h1 {
+    font-size: 24px;
+  }
+}
