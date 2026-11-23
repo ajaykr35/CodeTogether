@@ -1,0 +1,131 @@
+/* frontend/src/pages/Dashboard.css */
+
+.dash-page {
+  min-height: calc(100vh - 130px);
+  padding: 24px 0 8px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.dash-header {
+  margin-bottom: 28px;
+}
+
+.dash-header h1 {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+}
+
+.dash-header p {
+  margin: 0;
+  max-width: 560px;
+  font-size: 16px;
+}
+
+/* ---------- Action cards ---------- */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.action-card:hover {
+  border-color: #c4b5fd;
+  box-shadow: 0 12px 28px -14px rgba(124, 58, 237, 0.3);
+}
+
+.action-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.action-card p {
+  flex: 1;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+}
+
+.action-icon-blue {
+  background-color: #eff6ff;
+  color: var(--color-primary);
+}
+
+.action-icon-purple {
+  background-color: #f5f3ff;
+  color: var(--color-accent);
+}
+
+/* ---------- Your rooms ---------- */
+.rooms-section {
+  margin-top: 40px;
+}
+
+.rooms-section > h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px;
+  border: 2px dashed var(--color-border);
+  border-radius: 16px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+  .action-card {
+    padding: 22px;
+  }
+}
