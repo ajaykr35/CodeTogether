@@ -1,16 +1,23 @@
-// frontend/src/App.jsx
 // Navbar upar, Footer neeche, beech mein Routes ke hisaab se page badalta hai.
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import ComingSoon from "./pages/ComingSoon.jsx";
+import CreateRoom from "./pages/CreateRoom.jsx";
+import JoinRoom from "./pages/JoinRoom.jsx";
+import Workspace from "./pages/Workspace.jsx";
 
 function App() {
+  const { pathname } = useLocation();
+
+  // Workspace poori screen leta hai (jaise /rooms/K7X9Q2AF), isliye wahan footer nahi dikhate.
+  // /rooms/new aur /rooms/join workspace nahi hain.
+  const isWorkspace = /^\/rooms\/(?!new$|join$)[^/]+$/.test(pathname);
+
   return (
     <>
       <Navbar />
@@ -19,12 +26,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* Ye do pages agle steps mein poore banenge */}
-        <Route path="/rooms/new" element={<ComingSoon title="Create Room" />} />
-        <Route path="/rooms/join" element={<ComingSoon title="Join Room" />} />
+        <Route path="/rooms/new" element={<CreateRoom />} />
+        <Route path="/rooms/join" element={<JoinRoom />} />
+        <Route path="/rooms/:roomId" element={<Workspace />} />
       </Routes>
-      <Footer />
+      {!isWorkspace && <Footer />}
     </>
   );
 }

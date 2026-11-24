@@ -1,0 +1,1157 @@
+.ws {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 62px); /* navbar ki height ghata kar */
+  min-height: 560px;
+  background-color: var(--color-bg-soft);
+}
+
+.ws-small {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* ---------- Top bar ---------- */
+.ws-topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: #ffffff;
+}
+
+.ws-back {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ws-back:hover {
+  color: var(--color-primary);
+}
+
+.ws-sep {
+  width: 1px;
+  height: 20px;
+  background-color: var(--color-border);
+}
+
+.ws-title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ws-roomid {
+  padding: 2px 10px;
+  border-radius: 6px;
+  background-color: #eef2ff;
+  color: var(--color-accent);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Main grid ---------- */
+.ws-body {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 230px minmax(0, 1fr) 330px;
+  min-height: 0;
+}
+
+/* ---------- File explorer ---------- */
+.ws-explorer {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--color-border);
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+.ws-explorer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ws-icon-btn {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: var(--color-text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ws-icon-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ws-explorer-empty {
+  margin: 0;
+  padding: 4px 14px 14px;
+  font-size: 13px;
+}
+
+.ws-explorer-empty code,
+.ws-empty code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background-color: #f1f5f9;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+}
+
+.ws-newfile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 14px 12px;
+}
+
+.ws-newfile-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.ws-newfile-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.ws-newfile-input.has-error {
+  border-color: #dc2626;
+}
+
+.ws-newfile-error {
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.ws-newfile-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ws-filelist {
+  margin: 0;
+  padding: 0 8px 12px;
+  list-style: none;
+}
+
+.ws-file {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.ws-file:hover {
+  background-color: var(--color-bg-soft);
+}
+
+.ws-file.active {
+  background-color: #eff6ff;
+}
+
+.ws-file-open {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  padding: 7px 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ws-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ws-file-lang {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
+
+.ws-file-delete {
+  width: 26px;
+  height: 26px;
+  margin-right: 4px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.ws-file-delete:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* ---------- Center: tabs, toolbar, editor ---------- */
+.ws-center {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background-color: #ffffff;
+}
+
+.ws-tabs {
+  display: flex;
+  min-height: 38px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-soft);
+  overflow-x: auto;
+}
+
+.ws-tab {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  border-right: 1px solid var(--color-border);
+}
+
+.ws-tab.active {
+  background-color: #ffffff;
+  box-shadow: inset 0 -2px 0 var(--color-primary);
+}
+
+.ws-tab-name {
+  padding: 9px 4px 9px 14px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.ws-tab.active .ws-tab-name {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.ws-tab-close {
+  margin-right: 6px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.ws-tab-close:hover {
+  background-color: #e2e8f0;
+  color: var(--color-text);
+}
+
+.ws-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ws-lang {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background-color: #f5f3ff;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ws-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ws-editor {
+  flex: 1;
+  width: 100%;
+  min-height: 160px;
+  padding: 14px;
+  border: none;
+  resize: none;
+  background-color: #ffffff;
+  color: var(--color-text);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.ws-editor:focus {
+  outline: none;
+}
+
+.ws-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.ws-empty h2 {
+  font-size: 20px;
+}
+
+.ws-empty p {
+  max-width: 420px;
+  margin-bottom: 18px;
+}
+
+/* ---------- Bottom: output aur preview ---------- */
+.ws-bottom {
+  display: flex;
+  flex-direction: column;
+  height: 170px;
+  border-top: 1px solid var(--color-border);
+}
+
+.ws-bottom-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-soft);
+}
+
+.ws-bottom-tabs button,
+.ws-ptabs button,
+.ws-chips button {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ws-bottom-tabs button {
+  padding: 8px 10px;
+}
+
+.ws-bottom-tabs button.active {
+  color: var(--color-primary);
+  box-shadow: inset 0 -2px 0 var(--color-primary);
+}
+
+.ws-bottom-body {
+  flex: 1;
+  padding: 12px 14px;
+  overflow: auto;
+}
+
+.ws-bottom-body p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ---------- Right side panel ---------- */
+.ws-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--color-border);
+  background-color: #ffffff;
+}
+
+.ws-call {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ws-call strong {
+  display: block;
+  font-size: 14px;
+}
+
+.ws-call span {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.ws-call-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.ws-call-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.ws-call-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ws-ptabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ws-ptabs button {
+  flex: 1;
+  padding: 10px 4px;
+}
+
+.ws-ptabs button.active {
+  color: var(--color-primary);
+  box-shadow: inset 0 -2px 0 var(--color-primary);
+}
+
+.ws-pbody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.ws-chat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.ws-chat .ws-empty-small {
+  flex: 1;
+}
+
+.ws-chat-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ws-chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-bg-soft);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.ws-empty-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 8px;
+  text-align: center;
+}
+
+.ws-empty-small strong {
+  font-size: 15px;
+}
+
+.ws-empty-small p {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+.ws-section {
+  margin-bottom: 20px;
+}
+
+.ws-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.ws-muted {
+  margin: 0;
+  font-size: 13px;
+}
+
+.ws-badge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: #f5f3ff;
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ws-chips {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.ws-chips button {
+  padding: 5px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+.ws-chips button.active {
+  border-color: var(--color-primary);
+  background-color: #eff6ff;
+  color: var(--color-primary);
+}
+
+/* ---------- Status bar ---------- */
+.ws-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 16px;
+  background-color: #0f172a;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* ---------- Responsive ---------- */
+/* Tablet aur mobile: sab kuch ek ke neeche, page scroll hota hai */
+@media (max-width: 1000px) {
+  .ws {
+    height: auto;
+  }
+  .ws-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .ws-explorer {
+    max-height: 220px;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .ws-center {
+    min-height: 520px;
+  }
+  .ws-side {
+    min-height: 420px;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 480px) {
+  .ws-topbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ws-sep {
+    display: none;
+  }
+}
+
+/* ---------- Call panel (mic aur camera) ---------- */
+.call {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.call-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.call-head strong {
+  display: block;
+  font-size: 14px;
+}
+
+.call-head span {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.call-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.call-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+
+/* Off: halka laal, slash wala icon */
+.call-btn.off {
+  border-color: #fecaca;
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.call-btn.off:hover {
+  background-color: #fee2e2;
+}
+
+/* On: blue */
+.call-btn.on {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.call-btn.on:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Apna self-view */
+.call-tile {
+  position: relative;
+  margin-top: 12px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background-color: #0f172a;
+  overflow: hidden;
+}
+
+.call-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror, jaise aam video calls mein hota hai */
+}
+
+.call-name {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background-color: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Mic level bar */
+.call-meter {
+  height: 6px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.call-meter span {
+  display: block;
+  height: 100%;
+  background-color: #22c55e;
+  transition: width 0.1s linear;
+}
+
+.call-error {
+  margin: 10px 0 0;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.call-note {
+  margin: 10px 0 0;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ---------- Resizable panels ---------- */
+.ws {
+  position: relative;
+}
+
+.ws-center {
+  overflow: hidden;
+}
+
+/* Divider (do panels ke beech ki patti) */
+.ws-resizer {
+  position: relative;
+  flex-shrink: 0;
+  background-color: transparent;
+  touch-action: none;
+  z-index: 5;
+}
+
+.ws-resizer::after {
+  content: "";
+  position: absolute;
+  background-color: var(--color-border);
+  transition: background-color 0.15s;
+}
+
+.ws-resizer-v {
+  width: 6px;
+  cursor: col-resize;
+}
+
+.ws-resizer-v::after {
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 2px;
+}
+
+.ws-resizer-h {
+  height: 6px;
+  cursor: row-resize;
+}
+
+.ws-resizer-h::after {
+  left: 0;
+  right: 0;
+  top: 2px;
+  height: 2px;
+}
+
+.ws-resizer:hover::after,
+.ws-resizer:focus-visible::after {
+  background-color: var(--color-primary);
+}
+
+.ws-resizer:focus-visible {
+  outline: none;
+}
+
+/* Drag chalte waqt text select na ho, aur cursor sahi rahe */
+body.ws-resizing-x,
+body.ws-resizing-x * {
+  cursor: col-resize !important;
+  user-select: none;
+}
+
+body.ws-resizing-y,
+body.ws-resizing-y * {
+  cursor: row-resize !important;
+  user-select: none;
+}
+
+/* Top bar ke layout buttons */
+.ws-layoutbtns {
+  display: flex;
+  gap: 6px;
+}
+
+.ws-toggle {
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ws-toggle:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ws-toggle.active {
+  border-color: var(--color-primary);
+  background-color: #eff6ff;
+  color: var(--color-primary);
+}
+
+/* Bottom panel ka Hide/Show button (right side mein) */
+.ws-bottom-toggle {
+  margin-left: auto;
+  padding: 8px 10px;
+}
+
+/* ---------- Floating video window ---------- */
+.vw {
+  position: fixed;
+  z-index: 50;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  background-color: #0f172a;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.5);
+  overflow: hidden;
+}
+
+.vw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  padding: 0 6px 0 12px;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.vw-header:active {
+  cursor: grabbing;
+}
+
+.vw-header:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.vw-title {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vw-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.vw-buttons button {
+  width: 26px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vw-buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.vw-body {
+  position: relative;
+}
+
+.vw-body.hidden {
+  display: none;
+}
+
+.vw-body video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror, jaise aam video calls mein hota hai */
+}
+
+/* Neeche-right ka corner: size badalne ke liye */
+.vw-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  cursor: nwse-resize;
+  touch-action: none;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.55) 60%,
+    transparent 60%,
+    transparent 72%,
+    rgba(255, 255, 255, 0.55) 72%,
+    rgba(255, 255, 255, 0.55) 82%,
+    transparent 82%
+  );
+}
+
+/* Tablet aur mobile: panels ek ke neeche hote hain, isliye dividers ki zaroorat nahi */
+@media (max-width: 1000px) {
+  .ws-resizer {
+    display: none;
+  }
+}
+
+/* ---------- File explorer: folders aur tree ---------- */
+.ws-explorer-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ws-explorer-actions .ws-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ws-newfile-where {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ws-newfile-where strong {
+  color: var(--color-text);
+}
+
+.ws-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ws-link:hover {
+  text-decoration: underline;
+}
+
+.ws-tree {
+  margin: 0;
+  padding: 0 8px 12px;
+  list-style: none;
+}
+
+/* Folder ke andar ki list ko alag padding nahi chahiye */
+.ws-tree .ws-tree {
+  padding: 0;
+}
+
+.ws-row {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.ws-row:hover {
+  background-color: var(--color-bg-soft);
+}
+
+.ws-row.selected {
+  background-color: #f5f3ff;
+}
+
+.ws-row.active {
+  background-color: #eff6ff;
+}
+
+.ws-row-btn {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Folder ki row: chevron aur naam left mein, naam thoda bold */
+.ws-row.folder .ws-row-btn {
+  justify-content: flex-start;
+  font-weight: 600;
+}
+
+.ws-chevron {
+  width: 12px;
+  flex-shrink: 0;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.ws-row-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ws-tree-empty {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: #94a3b8;
+  font-size: 12px;
+  list-style: none;
+}
+
+/* Editor ke upar file ka path */
+.ws-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ws-path {
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ws-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Folder ki row ke "naya file / naya folder" icons */
+.ws-row-tools {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.ws-row:hover .ws-row-tools,
+.ws-row:focus-within .ws-row-tools {
+  opacity: 1;
+}
+
+.ws-row-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.ws-row-add:hover {
+  background-color: #e2e8f0;
+  color: var(--color-primary);
+}
+
+/* Touch screen par hover nahi hota, isliye icons hamesha dikhein */
+@media (hover: none) {
+  .ws-row-tools {
+    opacity: 1;
+  }
+}
+
+/* ---------- Rename ---------- */
+.ws-rename {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+}
+
+.ws-rename-input {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.ws-rename-input:focus {
+  outline: none;
+}
+
+.ws-rename-input.has-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* Row ke icons: jagah tabhi lete hain jab mouse upar ho (naam ko poori jagah milti hai) */
+.ws-row-tools {
+  max-width: 0;
+  overflow: hidden;
+}
+
+.ws-row:hover .ws-row-tools,
+.ws-row:focus-within .ws-row-tools {
+  max-width: 90px;
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .ws-row-tools {
+    max-width: 90px;
+    opacity: 1;
+  }
+}

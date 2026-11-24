@@ -1,0 +1,406 @@
+/* frontend/src/pages/RoomPages.css */
+/* Create Room aur Join Room pages ke common styles */
+
+.room-page {
+  min-height: calc(100vh - 130px);
+  padding: 24px 0 8px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+.room-back {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.room-back:hover {
+  color: var(--color-primary);
+}
+
+.room-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------- Left form card ---------- */
+.room-card {
+  padding: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 24px 60px -24px rgba(15, 23, 42, 0.22);
+}
+
+.room-card h1 {
+  font-size: clamp(24px, 4vw, 30px);
+  font-weight: 800;
+}
+
+.room-intro {
+  margin-bottom: 8px;
+}
+
+/* Form ke chhote sections ke heading (Basics, Access ...) */
+.form-section-title {
+  margin: 28px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Dropdown ka custom arrow */
+.form-select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.form-hint {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* ---------- Option cards (Who can join) ---------- */
+.type-legend {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.type-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.type-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 16px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 12px;
+  background-color: #ffffff;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.type-option:hover {
+  border-color: #c4b5fd;
+}
+
+.type-option.selected {
+  border-color: var(--color-primary);
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.type-option.selected .type-icon {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.type-option strong {
+  color: var(--color-text);
+  font-size: 15px;
+}
+
+.type-text {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* ---------- Info box aur checkbox ---------- */
+.form-note {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid #ddd6fe;
+  border-radius: 10px;
+  background-color: #f5f3ff;
+  color: #5b21b6;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.form-note code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background-color: #ede9fe;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+}
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-bg-soft);
+  cursor: pointer;
+}
+
+.check-row:hover {
+  border-color: #c4b5fd;
+}
+
+.check-row input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.check-row strong {
+  display: block;
+  font-size: 14px;
+}
+
+.check-row small {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.room-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.room-actions .btn {
+  padding: 12px 22px;
+  font-size: 15px;
+}
+
+/* ---------- Right info panel ---------- */
+.room-side {
+  position: relative;
+  padding: 32px 28px;
+  border-radius: 16px;
+  background-color: #0f172a;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.room-side::before,
+.room-side::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+}
+
+.room-side::before {
+  top: -70px;
+  right: -70px;
+  width: 220px;
+  height: 220px;
+  background: #2563eb;
+}
+
+.room-side::after {
+  bottom: -80px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  background: #7c3aed;
+}
+
+.room-side > * {
+  position: relative;
+  z-index: 1;
+}
+
+.room-side h2 {
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.room-side-list {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.room-side-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.room-side-no {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gradient);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.room-side-list strong {
+  display: block;
+  font-size: 15px;
+}
+
+.room-side-list span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* Right panel ke neeche "You will be the admin" wala box */
+.side-note {
+  margin: 24px 0 0;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.side-note strong {
+  color: #ffffff;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .room-layout {
+    grid-template-columns: 1fr;
+  }
+  .room-card {
+    padding: 28px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .type-picker {
+    grid-template-columns: 1fr;
+  }
+  .room-actions {
+    flex-direction: column;
+  }
+  .room-actions .btn {
+    text-align: center;
+  }
+}
+
+/* ---------- Join Room: waiting aur declined screens ---------- */
+.status-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.status-card h1 {
+  margin-top: 8px;
+}
+
+.status-card p {
+  max-width: 420px;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  border: 4px solid #e0e7ff;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status-icon-rejected {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.status-meta {
+  width: 100%;
+  margin: 8px 0 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-bg-soft);
+  font-size: 14px;
+  text-align: left;
+}
+
+.status-meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.status-meta span {
+  color: var(--color-text-muted);
+}
+
+.status-meta strong {
+  color: var(--color-text);
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
