@@ -1,10 +1,22 @@
-// Register aur (aage) login ka asli logic yahan likha jata hai.
+// Register aur login ka asli logic.
 
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SALT_ROUNDS = 10; // hash kitna "mehnat" se banega (zyada = zyada surakshit, par dheema)
+
+// Login mein user na mile tab bhi bcrypt chalate hain, taaki jawab ka time same rahe.
+// Isse bahar wala ye andaza nahi laga sakta ki ye email register hai ya nahi.
+const DUMMY_HASH = bcrypt.hashSync("dummy-password-for-timing", SALT_ROUNDS);
+
+// Login ke baad ka token banata hai. Payload mein sirf user ki id.
+function createToken(userId) {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  });
+}
 
 // Register ka data check karta hai. Galtiyan { field: "message" } ke roop mein return karta hai.
 function validateRegister({ name, email, password }) {
@@ -79,4 +91,65 @@ export async function register(req, res) {
       .status(500)
       .json({ message: "Something went wrong. Please try again." });
   }
+}
+
+// POST /api/auth/login
+export async function login(req, res) {
+  try {
+    const { email, password } = req.body || {};
+
+    // 1. Data check: dono text hone chahiye aur khali nahi
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email.trim() ||
+      !password
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Enter your email and password." });
+    }
+
+    // 2. User dhoondo. passwordHash model mein chhupa hai, isliye .select("+passwordHash") se maangte hain
+    const user = await User.findOne({
+      email: email.trim().toLowerCase(),
+    }).select("+passwordHash");
+
+    // 3. Password match karo (user na mile to dummy hash se, taaki time same rahe)
+    const isMatch = await bcrypt.compare(
+      password,
+      user ? user.passwordHash : DUMMY_HASH,
+    );
+
+    // 4. Email galat ho ya password, jawab ek hi: kisi ko hint nahi milta
+    if (!user || !isMatch) {
+      return res.status(401).json({ message: "Invalid email or password." });
+    }
+
+    // 5. Sab sahi: token banao aur bhejo
+    return res.status(200).json({
+      message: "Logged in.",
+      token: createToken(user._id),
+      user: { id: user._id, name: user.name, email: user.email },
+    });
+  } catch (error) {
+    console.error("Login error:", error.message);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong. Please try again." });
+  }
+}
+
+// protect middleware ne req.user pehle hi bhar diya hota hai
+export function getMe(req, res) {
+  const user = req.user;
+
+  return res.status(200).json({
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+    },
+  });
 }
