@@ -129,3 +129,124 @@
     padding: 22px;
   }
 }
+
+/* ---------- Your rooms: list ---------- */
+.rooms-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.rooms-head h2 {
+  margin: 0;
+}
+
+.rooms-refresh {
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.rooms-loading {
+  margin: 0;
+  padding: 24px 0;
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.room-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.room-item:hover {
+  border-color: #c4b5fd;
+  box-shadow: 0 12px 28px -14px rgba(124, 58, 237, 0.3);
+}
+
+.room-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.room-item-top h3 {
+  margin: 0 0 6px;
+  overflow: hidden;
+  font-size: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-item-id {
+  margin: 0 0 12px;
+  font-size: 13px;
+}
+
+.room-item-id strong {
+  color: var(--color-text);
+  font-family: Consolas, "Courier New", monospace;
+  letter-spacing: 0.06em;
+}
+
+.room-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-bottom: 16px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.room-item-open {
+  margin-top: auto;
+  text-align: center;
+}
+
+/* Role aur mode ke chhote labels */
+.badge {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-admin {
+  background-color: #ede9fe;
+  color: #6d28d9;
+}
+
+.badge-editor {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-viewer {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.badge-mode-open {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badge-mode-approval {
+  background-color: #fef3c7;
+  color: #b45309;
+}

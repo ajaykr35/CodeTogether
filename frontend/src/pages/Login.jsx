@@ -1,25 +1,33 @@
 // frontend/src/pages/Login.jsx
 // Login page: left mein dark brand panel, right mein email + password form.
+// Form ab asli backend API se judta hai.
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { parseApiError } from "../api/apiError.js";
 import "./Auth.css";
 
 function Login() {
-  // Form ki values yaad rakhne ke liye state
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Agar user kisi protected page se yahan bheja gaya, to login ke baad wahin wapas
+  const redirectTo = location.state?.from || "/dashboard";
+
   const [formData, setFormData] = useState({ email: "", password: "" });
-  // Har field ka error message
   const [errors, setErrors] = useState({});
-  // Submit ke baad dikhne wala message
-  const [message, setMessage] = useState("");
+  const [serverError, setServerError] = useState(""); // backend ka message
+  const [submitting, setSubmitting] = useState(false); // request chal rahi hai
 
   // Jab user kuch type kare, to us field ki value update ho
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: "" }); // type karte hi purana error hat jaye
-    setMessage("");
+    setErrors({ ...errors, [name]: "" });
+    setServerError("");
   };
 
   // Data sahi hai ya nahi, check karne wala function
@@ -40,14 +48,23 @@ function Login() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // page reload hone se rokta hai
     const newErrors = validate();
     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
 
-    if (Object.keys(newErrors).length === 0) {
-      // Backend abhi bana nahi hai, isliye honest message dikhate hain.
-      setMessage("Form is valid. Server login will be connected in Phase 4.");
+    setSubmitting(true);
+    setServerError("");
+
+    try {
+      await login(formData.email.trim(), formData.password);
+      navigate(redirectTo, { replace: true });
+    } catch (error) {
+      const { message } = parseApiError(error);
+      setServerError(message);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -118,7 +135,11 @@ function Login() {
             Enter your details to access your coding rooms.
           </p>
 
-          {message && <div className="form-info">{message}</div>}
+          {serverError && (
+            <div className="form-alert" role="alert">
+              {serverError}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} noValidate>
             <FormInput
@@ -144,13 +165,13 @@ function Login() {
               autoComplete="current-password"
             />
 
-            <button type="submit" className="btn btn-primary auth-submit">
-              Login
+            <button type="submit" className="btn btn-primary auth-submit" disabled={submitting}>
+              {submitting ? "Logging in..." : "Login"}
             </button>
           </form>
 
           <p className="auth-footer">
-            Don't have an account? <Link to="/register">Create Account</Link>
+            Don't have an account? <Link to="/register">Create one</Link>
           </p>
         </div>
       </div>

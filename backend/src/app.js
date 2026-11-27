@@ -2,10 +2,19 @@
 // Server chalane (listen) ka kaam server.js mein hai.
 
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
+import roomRoutes from "./routes/roomRoutes.js";
 
 const app = express();
+
+// CORS: sirf hamare frontend ko backend se baat karne do (koi aur website nahi)
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  }),
+);
 
 // Request ke andar bheja gaya JSON data padhne ke liye
 app.use(express.json());
@@ -21,8 +30,11 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Account se jude routes: /api/auth/register, ...
+// Account se jude routes: /api/auth/register, /login, /me
 app.use("/api/auth", authRoutes);
+
+// Room se jude routes: /api/rooms
+app.use("/api/rooms", roomRoutes);
 
 // Agar upar ka koi route match na ho, to ye chalega (404)
 app.use((req, res) => {

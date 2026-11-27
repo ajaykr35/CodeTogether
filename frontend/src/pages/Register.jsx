@@ -1,9 +1,12 @@
 // frontend/src/pages/Register.jsx
 // Register page: left mein brand panel, right mein signup form.
+// Form ab asli backend API se judta hai. Account banne ke baad user apne aap login ho jata hai.
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { parseApiError } from "../api/apiError.js";
 import "./Auth.css";
 
 // Left panel ke 3 steps
@@ -31,6 +34,9 @@ function getPasswordStrength(password) {
 }
 
 function Register() {
+  const { register } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,7 +44,8 @@ function Register() {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
-  const [message, setMessage] = useState("");
+  const [serverError, setServerError] = useState(""); // backend ka message
+  const [submitting, setSubmitting] = useState(false); // request chal rahi hai
 
   const strength = getPasswordStrength(formData.password);
 
@@ -47,7 +54,7 @@ function Register() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     setErrors({ ...errors, [name]: "" });
-    setMessage("");
+    setServerError("");
   };
 
   // Data sahi hai ya nahi, check karne wala function
@@ -82,16 +89,28 @@ function Register() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // page reload hone se rokta hai
     const newErrors = validate();
     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
 
-    if (Object.keys(newErrors).length === 0) {
-      // Backend abhi bana nahi hai, isliye honest message dikhate hain.
-      setMessage(
-        "Form is valid. Account creation will be connected in Phase 4."
-      );
+    setSubmitting(true);
+    setServerError("");
+
+    try {
+      await register(formData.name.trim(), formData.email.trim(), formData.password);
+      navigate("/dashboard", { replace: true });
+    } catch (error) {
+      const { message, fieldErrors } = parseApiError(error);
+      // Server ne kisi field ki galti batayi to wahin dikhao, warna upar ke laal box mein
+      if (Object.keys(fieldErrors).length > 0) {
+        setErrors((current) => ({ ...current, ...fieldErrors }));
+      } else {
+        setServerError(message);
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -138,7 +157,11 @@ function Register() {
             Fill in your details to join CodeTogether.
           </p>
 
-          {message && <div className="form-info">{message}</div>}
+          {serverError && (
+            <div className="form-alert" role="alert">
+              {serverError}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} noValidate>
             <FormInput
@@ -198,8 +221,8 @@ function Register() {
               autoComplete="new-password"
             />
 
-            <button type="submit" className="btn btn-primary auth-submit">
-              Create account
+            <button type="submit" className="btn btn-primary auth-submit" disabled={submitting}>
+              {submitting ? "Creating account..." : "Create account"}
             </button>
           </form>
 
